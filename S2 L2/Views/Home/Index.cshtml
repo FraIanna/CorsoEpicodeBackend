@@ -1,0 +1,31 @@
+﻿@model List<S2_L2.Models.Sala>
+
+<div class="container text-center">
+    <h1 class="display-4">Stato delle Sale</h1>
+    <div class="row">
+        <div class="col-12 text-center">
+        <table>
+        <tr>
+            <th class="px-3">Nome Sala</th>
+            <th class="px-3">Biglietti Venduti</th>
+            <th class="px-3">Biglietti Ridotti Venduti</th>
+        </tr>
+            @foreach (var sala in Model)
+            {
+                <tr>
+                    <td>
+                        @sala.Name
+                    </td>
+                    <td>
+                        @sala.SoldTickets
+                    </td>
+                    <td> 
+                        @sala.SoldReducedTickets
+                    </td>
+                </tr>
+            }
+            </table>
+            <a href="/Home/Selling">Vendi Biglietto</a>
+        </div>
+    </div>
+</div>
