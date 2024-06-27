@@ -25,6 +25,8 @@ namespace S2_L2.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Halls"] = halls;
+            ViewData["Tickets"] = tickets;
             return View(halls);
         }
 
@@ -32,7 +34,7 @@ namespace S2_L2.Controllers
         public IActionResult Selling()
         {
             ViewData["Halls"] = halls;
-            return View();
+            return View(new Selling());
         }
 
 
@@ -63,8 +65,14 @@ namespace S2_L2.Controllers
                 }
 
                 tickets.Add(new Biglietto { Utente = utente, Sala = selectedHall, Type = type });
-            }   
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Impossibile vendere il biglietto. La sala è piena.");
+                return View("Selling", model);
+            }
+
         }
 
 

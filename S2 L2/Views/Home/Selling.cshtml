@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Selling";
+
+    var halls = ViewData["Halls"] as List<S2_L2.Models.Sala>;
 }
 
 <h1>Selling</h1>
@@ -25,10 +27,13 @@
             <div class="form-group">
                 <label asp-for="Sala" class="control-label"></label>
                 <select asp-for="Sala" name="Sala" class="form-select">
-                    @foreach (var hall in ViewData["Halls"] as List<S2_L2.Models.Sala>)
+                      @if (halls != null)
+                    {
+                        foreach (var hall in halls)
                         {
-                        <option value="@hall.Name">@hall.Name</option>
+                            <option value="@hall.Name">@hall.Name</option>
                         }
+                    }
                 </select>
             </div>
             <div class="form-group">

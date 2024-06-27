@@ -5,6 +5,6 @@
         public string Name { get; set; }
         public int SoldTickets{ get; set; }
         public int SoldReducedTickets { get; set; }
-        public static int Capacity { get; set; }
+        public static int Capacity { get; set; } = 120;
     }
 }

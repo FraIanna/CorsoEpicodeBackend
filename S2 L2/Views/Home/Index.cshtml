@@ -1,31 +1,55 @@
 ﻿@model List<S2_L2.Models.Sala>
-
+@{
+    var tickets = ViewData["Tickets"] as List<S2_L2.Models.Biglietto>;
+    tickets = tickets ?? new List<S2_L2.Models.Biglietto>(); 
+    var halls = ViewData["Halls"] as List<S2_L2.Models.Sala>;
+}
 <div class="container text-center">
     <h1 class="display-4">Stato delle Sale</h1>
     <div class="row">
         <div class="col-12 text-center">
-        <table>
-        <tr>
-            <th class="px-3">Nome Sala</th>
-            <th class="px-3">Biglietti Venduti</th>
-            <th class="px-3">Biglietti Ridotti Venduti</th>
-        </tr>
-            @foreach (var sala in Model)
-            {
-                <tr>
-                    <td>
-                        @sala.Name
-                    </td>
-                    <td>
-                        @sala.SoldTickets
-                    </td>
-                    <td> 
-                        @sala.SoldReducedTickets
-                    </td>
-                </tr>
-            }
-            </table>
-            <a href="/Home/Selling">Vendi Biglietto</a>
+            <div class="border border-dark border-3 rounded shadow px-5 py-5 ">
+                <table class="text-center mx-auto my-3 table table-striped">
+                    <tr class="border-top border-bottom border-dark">
+                        <th class="px-3">Sale</th>
+                        <th class="px-3">Biglietti Interi Venduti</th>
+                        <th class="px-3">Biglietti Ridotti Venduti</th>
+                        
+                       
+                    </tr>
+                    <tbody>
+                        @foreach (var hall in halls)
+                        {
+                            var ticketsForHall = tickets.Where(t => t.Sala.Name == hall.Name).ToList();
+                            if (ticketsForHall.Count == 0)
+                            {
+                                <tr>
+                                    <td class="border-end border-dark">@hall.Name</td>
+                                    <td class="border-end border-dark">@hall.SoldTickets</td>
+                                    <td class="border-end border-dark">@hall.SoldReducedTickets</td>
+                                    <td colspan="6" align="right">Nessun biglietto venduto</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var ticket in ticketsForHall)
+                                {
+                                    <tr>
+                                        <td class="px-3 border-end border-dark">@hall.Name</td>
+                                        <td class="px-3 border-end border-dark">@hall.SoldTickets</td>
+                                        <td class="px-3 border-end border-dark">@hall.SoldReducedTickets</td>
+                                        
+                                        
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
+    <div class="row mt-4">
+        <a href="/Home/Selling" class="link-primary">Vendi Biglietto</a>
     </div>
 </div>
