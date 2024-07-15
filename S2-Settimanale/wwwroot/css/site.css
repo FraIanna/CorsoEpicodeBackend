@@ -1,0 +1,53 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background-color: #7997b5;
+}
+
+.carousel-item {
+    height: 15em;
+}
+
+.custom-container {
+    box-shadow: 0 1em 1em .25em rgba(0, 0, 0, 0.3);
+    background-color: #26313c;
+    color: white;
+}
+
+.custom-container-1 {
+    box-shadow: 0 1em 1em .25em rgba(0, 0, 0, 0.3);
+    background-color: #26313c;
+    color: white;
+    border-radius: 10px;
+}
+
+.custom-container-1 a, .custom-container-2 a{
+    text-decoration: none;
+}
+
+.custom-container-2 {
+    box-shadow: 0 1em 1em .25em rgba(0, 0, 0, 0.3);
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+footer .link-secondary:hover{
+    color: white;
+}
