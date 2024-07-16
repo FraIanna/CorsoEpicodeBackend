@@ -1,0 +1,10 @@
+﻿@using S2_Settimanale.Services.Models
+
+@model User
+<form asp-action="Login">
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" />  
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <button>Login</button>
+</form>
