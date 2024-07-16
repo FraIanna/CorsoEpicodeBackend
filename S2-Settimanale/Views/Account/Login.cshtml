@@ -1,10 +1,18 @@
 ﻿@using S2_Settimanale.Services.Models
 
 @model User
-<form asp-action="Login">
-    <label asp-for="UserName"></label>
-    <input asp-for="UserName" />  
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <button>Login</button>
-</form>
+<div id="Login">
+    <h3 class="display-6">Accedi</h3>
+    <hr />
+
+    <div class="custom-container col-md-6 offset-md-3 col-8 offset-2">
+        <form asp-action="Login" class="d-flex flex-column p-3">
+            <label asp-for="UserName" class="form-label"></label>
+            <input asp-for="UserName" class="form-custom" placeholder="Il tuo Username"/>
+            <hr />
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-custom" placeholder="La tua password"/>
+            <button class="btn btn-outline-light align-self-center mt-3">Login</button>
+        </form>
+    </div>
+</div>

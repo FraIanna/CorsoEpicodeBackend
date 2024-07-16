@@ -1,0 +1,86 @@
+﻿@model S2_Settimanale.Services.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+<div>
+    <h3 class="display-6">Registrati</h3>
+    <hr />
+    <div class="row">
+        <div class="custom-container col-md-6 offset-md-3 col-8 offset-2">
+            <form asp-action="Register" class="d-flex flex-column p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="UserName" class="form-label">Username</label>
+                    <input asp-for="UserName" class="form-custom" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-custom" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-custom" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="ConfirmPassword" class="form-label">Conferma Password</label>
+                    <input asp-for="ConfirmPassword" class="form-custom" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Nome" class="form-label"></label>
+                    <input asp-for="Nome" class="form-custom" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Tipo" class="form-label">Privato o Azienda?</label>
+                    <input asp-for="Tipo" class="form-custom" />
+                    <span asp-validation-for="Tipo" class=" alert-primary p-2 mt-2">Inserisci "Azienda" o "Privato"</span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="CodiceFiscale" class="form-label">Codice Fiscale</label>
+                    <input asp-for="CodiceFiscale" class="form-custom" />
+                    <span asp-validation-for="CodiceFiscale" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="PartitaIva" class="form-label">Partita Iva</label>
+                    <input asp-for="PartitaIva" class="form-custom" />
+                    <span asp-validation-for="PartitaIva" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Indirizzo" class="form-label"></label>
+                    <input asp-for="Indirizzo" class="form-custom" />
+                    <span asp-validation-for="Indirizzo" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Città" class="form-label"></label>
+                    <input asp-for="Città" class="form-custom" />
+                    <span asp-validation-for="Città" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Cap" class="form-label"></label>
+                    <input asp-for="Cap" class="form-custom" />
+                    <span asp-validation-for="Cap" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Telefono" class="form-label"></label>
+                    <input asp-for="Telefono" class="form-custom" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <button type="submit" value="Create" class="btn btn-outline-light">Registrati</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -26,7 +26,7 @@ namespace S2_Settimanale.Services.Models
         public string Nome { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(7)]
         public string Tipo { get; set; }
 
         [StringLength(16)]
@@ -44,11 +44,11 @@ namespace S2_Settimanale.Services.Models
         public string Città { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(5)]
         public string Cap { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(13)]
         public string Telefono { get; set; }
 
         public List<string> Roles { get; set; } = [];

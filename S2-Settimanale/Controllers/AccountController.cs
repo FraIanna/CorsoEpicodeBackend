@@ -30,17 +30,13 @@ namespace S2_Settimanale.Controllers
 
                 if (success)
                 {
-                    // Redirect alla pagina di successo o altro comportamento desiderato
                     return RedirectToAction("Login");
                 }
             }
             catch (Exception ex)
             {
-                // Gestione dell'errore, ad esempio log o altra gestione dell'eccezione
                 ModelState.AddModelError(string.Empty, "Si è verificato un errore durante la registrazione.");
             }
-
-            // Se il modello non è valido o se c'è stato un errore, ritorna alla vista di registrazione con gli errori
             return View(user);
         }
 

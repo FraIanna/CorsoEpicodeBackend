@@ -48,6 +48,29 @@ body {
     border-radius: 10px;
 }
 
+.form-custom{
+    outline: none;
+    border-radius: 5px;
+    padding: .25em;
+    transition: all .1s linear;
+}
+
+.form-custom:focus {
+    outline: groove #77dafffa;
+}
+
+#Login {
+    min-height: 63.4vh;
+}
+
+.custom-container form div{
+    border-bottom: 1px solid grey
+}
+
+.custom-container form div:last-of-type {
+    border-bottom: none;
+}
+
 footer .link-secondary:hover{
     color: white;
 }
