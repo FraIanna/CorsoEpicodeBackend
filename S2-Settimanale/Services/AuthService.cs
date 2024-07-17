@@ -27,7 +27,7 @@ namespace S2_Settimanale.Services
                 using var r = cmd.ExecuteReader();
                 if (r.Read())
                 {
-                    var u = new S2_Settimanale.Services.Models.User { Id = r.GetInt32(0), Password = password, UserName = username };
+                    var u = new User { Id = r.GetInt32(0), Password = password, UserName = username };
                     r.Close();
                     using var roleCmd = new SqlCommand(ROLES_COMMAND, conn);
                     roleCmd.Parameters.AddWithValue("@id", u.Id);
@@ -47,49 +47,32 @@ namespace S2_Settimanale.Services
             return null;
         }
 
-        public async Task<bool> RegisterUserAsync(User model)
+        public async Task<int> RegisterClientAsync(Client model)
         {
             try
             {
-                using (var conn = new SqlConnection(connectionString))
-                {
-                    await conn.OpenAsync();
+                using var conn = new SqlConnection(connectionString);
+                await conn.OpenAsync();
+                string clienteQuery = 
+                    @"INSERT INTO clienti (Nome, Tipo, CodiceFiscale, PartitaIva, Telefono, Indirizzo, Città, Cap) 
+                  VALUES (@Nome, @Tipo, @CodiceFiscale, @PartitaIva, @Telefono, @Indirizzo, @Città, @Cap);
+                  SELECT SCOPE_IDENTITY();";
+                using var cmd = new SqlCommand(clienteQuery, conn);
+                cmd.Parameters.AddWithValue("@Nome", model.Nome);
+                cmd.Parameters.AddWithValue("@Tipo", model.Tipo ? 1 : 0);
+                cmd.Parameters.AddWithValue("@CodiceFiscale", model.CodiceFiscale ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@PartitaIva", model.PartitaIva ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Telefono", model.Telefono);
+                cmd.Parameters.AddWithValue("@Indirizzo", model.Indirizzo);
+                cmd.Parameters.AddWithValue("@Città", model.Città);
+                cmd.Parameters.AddWithValue("@Cap", model.Cap);
 
-                    // Inserimento nella tabella Users
-                    string userQuery = "INSERT INTO Users (UserName, Email, Password) VALUES (@UserName, @Email, @Password); SELECT SCOPE_IDENTITY();";
-                    int userId;
-                    using (var cmd = new SqlCommand(userQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UserName", model.UserName);
-                        cmd.Parameters.AddWithValue("@Email", model.Email);
-                        cmd.Parameters.AddWithValue("@Password", model.Password);
-                        userId = Convert.ToInt32(await cmd.ExecuteScalarAsync());
-                    }
-
-                    // Inserimento nella tabella Clienti
-                    string clienteQuery = "INSERT INTO Clienti (Nome, Tipo, CodiceFiscale, PartitaIva, Indirizzo, Città, Cap, Telefono, UserId) " +
-                                          "VALUES (@Nome, @Tipo, @CodiceFiscale, @PartitaIva, @Indirizzo, @Città, @Cap, @Telefono, @UserId)";
-                    using (var cmd = new SqlCommand(clienteQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Nome", model.Nome);
-                        cmd.Parameters.AddWithValue("@Tipo", model.Tipo); // Aggiungi campo "Tipo" se necessario
-                        cmd.Parameters.AddWithValue("@CodiceFiscale", model.CodiceFiscale ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@PartitaIva", model.PartitaIva ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Indirizzo", model.Indirizzo);
-                        cmd.Parameters.AddWithValue("@Città", model.Città);
-                        cmd.Parameters.AddWithValue("@Cap", model.Cap);
-                        cmd.Parameters.AddWithValue("@Telefono", model.Telefono);
-                        cmd.Parameters.AddWithValue("@UserId", userId);
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-
-                return true;
+                int newClientId = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                return newClientId;
             }
             catch (Exception ex)
             {
-                // Gestione dell'errore, ad esempio log o altra gestione dell'eccezione
-                throw new Exception("Errore durante la registrazione dell'utente", ex);
+                throw new Exception("Errore durante la registrazione del cliente", ex);
             }
         }
     }

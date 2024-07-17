@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using S2_Settimanale.Services;
 using S2_Settimanale.Services.Models;
@@ -15,30 +16,36 @@ namespace S2_Settimanale.Controllers
         {
             _authService = authService;
         }
-
+        [Authorize]
         public IActionResult Register()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register(Client client)
         {
             try
             {
-                bool success = await _authService.RegisterUserAsync(user);
+                int clientId = await _authService.RegisterClientAsync(client);
 
-                if (success)
+                if (clientId > 0)
                 {
-                    return RedirectToAction("Login");
+                    TempData["SuccessMessage"] = "Cliente registrato con successo. ID: " + clientId;
+                    return RedirectToAction("RegisterShipping", "Shipping");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Errore durante la registrazione del cliente.");
                 }
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Si è verificato un errore durante la registrazione.");
             }
-            return View(user);
+            return View(client);
         }
+
 
 
         public IActionResult Login()

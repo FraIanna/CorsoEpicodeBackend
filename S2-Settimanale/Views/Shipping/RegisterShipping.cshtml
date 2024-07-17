@@ -1,0 +1,66 @@
+﻿@model S2_Settimanale.Services.Models.Shipping
+
+@{
+    ViewData["Title"] = "RegisterShipping";
+}
+<div>
+    <h1 class="display-6">Registrazione Spedizione</h1>
+    <hr />
+    <div class="row">
+        <div class="custom-container col-md-6 offset-md-3 col-8 offset-2">
+            <form asp-action="RegisterShipping" class="d-flex flex-column p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="ClienteId" class="control-label"></label>
+                    <input asp-for="ClienteId" class="form-custom" />
+                    <span asp-validation-for="ClienteId" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="DataSpedizione" class="control-label"></label>
+                    <input asp-for="DataSpedizione" class="form-custom" />
+                    <span asp-validation-for="DataSpedizione" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="Peso" class="control-label"></label>
+                    <input asp-for="Peso" class="form-control" />
+                    <span asp-validation-for="Peso" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="CittaDestinataria" class="control-label"></label>
+                    <input asp-for="CittaDestinataria" class="form-custom" />
+                    <span asp-validation-for="CittaDestinataria" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="IndirizzoDestinatario" class="control-label"></label>
+                    <input asp-for="IndirizzoDestinatario" class="form-custom" />
+                    <span asp-validation-for="IndirizzoDestinatario" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="NominativoDestinatario" class="control-label"></label>
+                    <input asp-for="NominativoDestinatario" class="form-custom" />
+                    <span asp-validation-for="NominativoDestinatario" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="CostoSpedizione" class="control-label"></label>
+                    <input asp-for="CostoSpedizione" class="form-control" />
+                    <span asp-validation-for="CostoSpedizione" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <label asp-for="DataConsegnaPrevista" class="control-label"></label>
+                    <input asp-for="DataConsegnaPrevista" class="form-custom" />
+                    <span asp-validation-for="DataConsegnaPrevista" class="text-danger"></span>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <button class="btn btn-outline-light">Registra Spedizione</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

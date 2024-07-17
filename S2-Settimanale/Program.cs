@@ -14,7 +14,10 @@ builder.Services
         opt.LoginPath = "/Account/Login";
     });
 
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services
+    .AddScoped<IAuthService, AuthService>()
+    .AddScoped<IShippingService, ShippingService>()
+    ;
 
 var app = builder.Build();
 
