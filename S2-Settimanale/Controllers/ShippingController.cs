@@ -37,5 +37,71 @@ namespace S2_Settimanale.Controllers
             }
             return View(shipping);
         }
+
+        public async Task<IActionResult> ShippingToday()
+        {
+            try
+            {
+                var spedizioni = await _shippingService.GetShippingTodayAsync();
+                return View(spedizioni);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Si è verificato un errore durante il recupero delle spedizioni in consegna oggi.");
+                return View(new List<Shipping>());
+            }
+        }
+
+        public async Task<IActionResult> GetShipmentsNotYetDelivered()
+        {
+            try
+            {
+                int numeroSpedizioni = await _shippingService.GetAllshipmentsNotYetDelivered();
+                ViewBag.NumeroSpedizioni = numeroSpedizioni;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Si è verificato un errore durante il recupero del numero delle spedizioni in attesa di consegna.");
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> NumberOfShipmentsForeachCity()
+        {
+            try
+            {
+                var spedizioniPerCitta = await _shippingService.GetShipmentsForeachCityAsync();
+                return View(spedizioniPerCitta);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Si è verificato un errore durante il recupero del numero delle spedizioni per città.");
+                return View(new Dictionary<string, int>());
+            }
+        }
+
+        [AllowAnonymous]
+        public IActionResult VerifyShipmentStatus()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> VerifyShipmentStatus(string codiceFiscalePartitaIva, int numeroSpedizione)
+        {
+            try
+            {
+                var aggiornamenti = await _shippingService.GetShipmentUpdateAsync(codiceFiscalePartitaIva, numeroSpedizione);
+                return View("ShipmentDetails", aggiornamenti);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Si è verificato un errore durante il recupero degli aggiornamenti della spedizione.");
+                return View();
+            }
+        }
+
     }
 }

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Verifica Stato Spedizione";
+}
+<div class="minimal-height">
+    <h2>Verifica lo stato della spedizione</h2>
+    <hr />
+    <div class="custom-container col-md-6 offset-md-3 col-8 offset-2">
+        <form asp-action="VerifyShipmentStatus" method="post" class="d-flex flex-column p-3">
+            <div class="d-flex flex-column p-3">
+                <label for="codiceFiscalePartitaIva">Codice Fiscale o Partita IVA</label>
+                <input type="text" class="form-custom" id="codiceFiscalePartitaIva" name="codiceFiscalePartitaIva" required>
+            </div>
+            <div class="d-flex flex-column p-3">
+                <label for="numeroSpedizione">Numero Spedizione</label>
+                <input type="number" class="form-custom" id="numeroSpedizione" name="numeroSpedizione" required>
+            </div>
+            <button type="submit" class="btn btn-outline-light align-self-center">Verifica</button>
+        </form>
+    </div>
+</div>
+

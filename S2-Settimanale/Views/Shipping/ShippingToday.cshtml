@@ -1,0 +1,47 @@
+﻿@model List<S2_Settimanale.Services.Models.Shipping>
+
+@{
+    ViewData["Title"] = "Spedizioni in consegna oggi";
+}
+<div class="minimal-height">
+    <h2 class="display-6">Spedizioni in consegna oggi</h2>
+    <hr />
+    @if (Model.Count == 0)
+    {
+        <p>Non ci sono spedizioni in consegna oggi.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente ID</th>
+                    <th>Data Spedizione</th>
+                    <th>Peso</th>
+                    <th>Città Destinataria</th>
+                    <th>Indirizzo Destinatario</th>
+                    <th>Nominativo Destinatario</th>
+                    <th>Costo</th>
+                    <th>Data Consegna Prevista</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var spedizione in Model)
+                {
+                    <tr>
+                        <td>@spedizione.Id</td>
+                        <td>@spedizione.ClienteId</td>
+                        <td>@spedizione.DataSpedizione.ToString("dd/MM/yyyy")</td>
+                        <td>@spedizione.Peso</td>
+                        <td>@spedizione.CittaDestinataria</td>
+                        <td>@spedizione.IndirizzoDestinatario</td>
+                        <td>@spedizione.NominativoDestinatario</td>
+                        <td>@spedizione.CostoSpedizione</td>
+                        <td>@spedizione.DataConsegnaPrevista.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

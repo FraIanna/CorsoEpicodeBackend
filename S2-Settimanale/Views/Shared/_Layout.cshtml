@@ -27,11 +27,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Registra Cliente</a>
                             </li>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Shipping" asp-action="RegisterShipping">Registra Spedizione</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shipping" asp-action="ShippingToday">Spedizioni in consegna oggi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shipping" asp-action="GetShipmentsNotYetDelivered">Spedizioni in attesa di consegna</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shipping" asp-action="NumberOfShipmentsForeachCity">Spedizioni per ogni città</a>
                             </li>
                         }
                         @if (!User.Identity.IsAuthenticated)
@@ -40,6 +46,9 @@
                                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Accedi</a>
                             </li>
                         }
+                        <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shipping" asp-action="VerifyShipmentStatus">Verifica la tua Spedizione!</a>
+                            </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">

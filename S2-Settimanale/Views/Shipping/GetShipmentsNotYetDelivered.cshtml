@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Numero delle spedizioni in attesa di consegna";
+}
+<div class="minimal-height">
+    <h2 class="display-6">Numero delle spedizioni in attesa di consegna</h2>
+    <hr />
+    @if (ViewBag.NumeroSpedizioni != null)
+    {
+        <p>Il numero delle spedizioni in attesa di consegna è: <strong>@ViewBag.NumeroSpedizioni</strong></p>
+    }
+    else
+    {
+        <p>Non è stato possibile recuperare il numero delle spedizioni in attesa di consegna.</p>
+    }
+</div>

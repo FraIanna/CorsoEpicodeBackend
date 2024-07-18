@@ -53,13 +53,12 @@ namespace S2_Settimanale.Services
             {
                 using var conn = new SqlConnection(connectionString);
                 await conn.OpenAsync();
-                string clienteQuery = 
+                string clienteQuery =
                     @"INSERT INTO clienti (Nome, Tipo, CodiceFiscale, PartitaIva, Telefono, Indirizzo, Città, Cap) 
-                  VALUES (@Nome, @Tipo, @CodiceFiscale, @PartitaIva, @Telefono, @Indirizzo, @Città, @Cap);
-                  SELECT SCOPE_IDENTITY();";
+                  OUTPUT INSERTED.Id VALUES (@Nome, @Tipo, @CodiceFiscale, @PartitaIva, @Telefono, @Indirizzo, @Città, @Cap);";
                 using var cmd = new SqlCommand(clienteQuery, conn);
                 cmd.Parameters.AddWithValue("@Nome", model.Nome);
-                cmd.Parameters.AddWithValue("@Tipo", model.Tipo ? 1 : 0);
+                cmd.Parameters.AddWithValue("@Tipo", model.Tipo);
                 cmd.Parameters.AddWithValue("@CodiceFiscale", model.CodiceFiscale ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@PartitaIva", model.PartitaIva ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Telefono", model.Telefono);

@@ -59,11 +59,15 @@ body {
     outline: groove #77dafffa;
 }
 
-#Login {
+.minimal-height {
     min-height: 63.4vh;
 }
 
-.custom-container form div{
+ {
+    min-height: 63.4vh;
+}
+
+.custom-container form div {
     border-bottom: 1px solid grey
 }
 
